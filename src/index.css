@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  font-family: "Orbitron", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.text {
+  text-align: center;
+  margin: 10vh auto;
+  font-size: 5vw;
+}
+.count {
+  font-size: 7vw;
+  margin: 20vh auto;
+}
+.chief {
+  position: absolute;
+  text-align: center;
+}
+.numbers {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.slide-enter {
+  opacity: 0;
+  transform: translate3d(0, 50%, 0);
+}
+.slide-enter.slide-enter-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: transform 400ms ease, opacity 400ms ease;
+}
+.slide-exit {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+.slide-exit.slide-exit-active {
+  opacity: 0;
+  transition: transform 400ms ease, opacity 400ms ease;
+}
+.slide-exit.slide-exit-active {
+  transform: translate3d(0, -50%, 0);
+}
+.slide-enter,
+.slide-exit {
+  .hide-animation {
+    display: none;
+  }
+}
