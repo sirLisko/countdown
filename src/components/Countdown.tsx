@@ -1,4 +1,3 @@
-import queryString from "query-string";
 import React from "react";
 import {
   differenceInDays,
@@ -12,7 +11,11 @@ import {
 
 import FlipNumbers from "./FlipNumbers";
 
-const Countdown: React.FC<{ from: Date; to: Date }> = ({ from, to }) => {
+const Countdown: React.FC<{ from: Date; to: Date; filters: string[] }> = ({
+  from,
+  to,
+  filters
+}) => {
   const days = differenceInDays(to, from);
   const subbedDays = subDays(to, days);
 
@@ -26,13 +29,23 @@ const Countdown: React.FC<{ from: Date; to: Date }> = ({ from, to }) => {
 
   return (
     <div>
-      <p className="text">to the next year</p>
       <div className="count" style={{ display: "flex" }}>
         <FlipNumbers number={days} /> :
         <FlipNumbers number={hours} /> :
         <FlipNumbers number={minutes} /> :
         <FlipNumbers number={seconds} />
       </div>
+      {filters && (
+        <div style={{ textAlign: "center" }}>
+          {filters.includes("h") && <p>hours: {differenceInHours(to, from)}</p>}
+          {filters.includes("m") && (
+            <p>minutes: {differenceInMinutes(to, from)}</p>
+          )}
+          {filters.includes("s") && (
+            <p>seconds: {differenceInSeconds(to, from)}</p>
+          )}
+        </div>
+      )}
     </div>
   );
 };
