@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 
 import Countdown from "./Countdown";
@@ -7,10 +7,10 @@ import { isValidDate } from "../utils/date";
 
 const NEXT_YEAR = new Date(new Date().getFullYear() + 1, 0, 1, 0, 0, 0);
 
-class CountdownPage extends Component<RouteComponentProps> {
-  state = {
+class CountdownPage extends React.Component<RouteComponentProps> {
+  readonly state = {
     now: new Date(),
-    then: null,
+    then: NEXT_YEAR,
     message: "to the next year",
     filters: []
   };
@@ -18,12 +18,12 @@ class CountdownPage extends Component<RouteComponentProps> {
 
   componentDidMount() {
     const { location } = this.props;
-    const { message: defaultMessage } = this.state;
+    const { message: defaultMessage, then: defaultThen } = this.state;
     this.interval = setInterval(() => this.setState({ now: new Date() }), 1000);
     const { then, message, filters } = getQueryString(location.search);
     this.setState({
       message: then ? message : message || defaultMessage,
-      then: then || NEXT_YEAR,
+      then: then || defaultThen,
       filters: filters
     });
   }
@@ -34,7 +34,7 @@ class CountdownPage extends Component<RouteComponentProps> {
 
   render() {
     const { now, message, then, filters } = this.state;
-    if (!then) {
+    if (!this.interval) {
       return null;
     }
     return (

@@ -1,10 +1,10 @@
 import queryString from "query-string";
-import { parse } from "date-fns";
+import { parseISO } from "date-fns";
 
 export const getQueryString = (search: string) => {
   const { t, m, f } = queryString.parse(search);
   return {
-    then: typeof t === "string" && parse(t),
+    then: typeof t === "string" && parseISO(t),
     message: m,
     filters: typeof f === "string" && f.split(",")
   };
