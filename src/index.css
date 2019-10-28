@@ -31,22 +31,32 @@ code {
 
 .slide-enter {
   opacity: 0;
+  transform: translate3d(0, -50%, 0);
+}
+.slide-inv-enter {
+  opacity: 0;
   transform: translate3d(0, 50%, 0);
 }
+.slide-inv-enter.slide-inv-enter-active,
 .slide-enter.slide-enter-active {
   opacity: 1;
   transform: translate3d(0, 0, 0);
   transition: transform 400ms ease, opacity 400ms ease;
 }
+.slide-inv-exit,
 .slide-exit {
   opacity: 1;
   transform: translate3d(0, 0, 0);
 }
+.slide-inv-exit.slide-inv-exit-active,
 .slide-exit.slide-exit-active {
   opacity: 0;
   transition: transform 400ms ease, opacity 400ms ease;
 }
 .slide-exit.slide-exit-active {
+  transform: translate3d(0, 50%, 0);
+}
+.slide-inv-exit.slide-inv-exit-active {
   transform: translate3d(0, -50%, 0);
 }
 .slide-enter,

@@ -1,51 +1,26 @@
 import React from "react";
-import {
-  differenceInDays,
-  differenceInHours,
-  differenceInMinutes,
-  differenceInSeconds,
-  subDays,
-  subMinutes,
-  subHours
-} from "date-fns";
 
-import FlipNumbers from "./FlipNumbers";
+import { getTimeDifferences } from "utils/date";
 
-const Countdown: React.FC<{ from: Date; to: Date; filters: string[] }> = ({
-  from,
-  to,
-  filters
-}) => {
-  const days = differenceInDays(to, from);
-  const subbedDays = subDays(to, days);
+import FlipNumbers from "components/FlipNumbers";
+import CountdownFilters from "components/CountdownFilters";
 
-  const hours = differenceInHours(subbedDays, from);
-  const subbedHours = subHours(subbedDays, hours);
-
-  const minutes = differenceInMinutes(subbedHours, from);
-  const subbedMinutes = subMinutes(subbedHours, minutes);
-
-  const seconds = differenceInSeconds(subbedMinutes, from);
-
+const Countdown: React.FC<{
+  from: Date;
+  to: Date;
+  filters: string[];
+  isInverted: boolean;
+}> = ({ from, to, filters, isInverted }) => {
+  const { days, hours, minutes, seconds } = getTimeDifferences(to, from);
   return (
     <div>
       <div className="count" style={{ display: "flex" }}>
-        <FlipNumbers number={days} /> :
-        <FlipNumbers number={hours} /> :
-        <FlipNumbers number={minutes} /> :
-        <FlipNumbers number={seconds} />
+        <FlipNumbers number={days} isInverted={isInverted} /> :
+        <FlipNumbers number={hours} isInverted={isInverted} /> :
+        <FlipNumbers number={minutes} isInverted={isInverted} /> :
+        <FlipNumbers number={seconds} isInverted={isInverted} />
       </div>
-      {filters && (
-        <div style={{ textAlign: "center" }}>
-          {filters.includes("h") && <p>hours: {differenceInHours(to, from)}</p>}
-          {filters.includes("m") && (
-            <p>minutes: {differenceInMinutes(to, from)}</p>
-          )}
-          {filters.includes("s") && (
-            <p>seconds: {differenceInSeconds(to, from)}</p>
-          )}
-        </div>
-      )}
+      {filters && <CountdownFilters from={from} to={to} filters={filters} />}
     </div>
   );
 };

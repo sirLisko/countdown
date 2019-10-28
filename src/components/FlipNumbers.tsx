@@ -1,13 +1,17 @@
 import React from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-const SlideTransition: React.FC<{ id: string; style?: object }> = ({
-  id,
-  children,
-  style
-}) => (
+const SlideTransition: React.FC<{
+  id: string;
+  style?: object;
+  isInverted: boolean;
+}> = ({ id, children, style, isInverted }) => (
   <TransitionGroup>
-    <CSSTransition key={id} classNames="slide" timeout={400}>
+    <CSSTransition
+      key={id}
+      classNames={isInverted ? "slide-inv" : "slide"}
+      timeout={400}
+    >
       <div className="chief" style={style}>
         {children}
       </div>
@@ -15,7 +19,10 @@ const SlideTransition: React.FC<{ id: string; style?: object }> = ({
   </TransitionGroup>
 );
 
-const FlipNumbers: React.FC<{ number: number }> = ({ number }) => {
+const FlipNumbers: React.FC<{ number: number; isInverted: boolean }> = ({
+  number,
+  isInverted
+}) => {
   const numbers = number > 9 ? number.toString() : "0" + number.toString();
   return (
     <div
@@ -34,6 +41,7 @@ const FlipNumbers: React.FC<{ number: number }> = ({ number }) => {
             key={index}
             id={numb}
             style={{ marginRight: `${index}em`, right: 0 }}
+            isInverted={isInverted}
           >
             {numb}
           </SlideTransition>

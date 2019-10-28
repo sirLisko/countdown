@@ -1,9 +1,9 @@
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 
-import Countdown from "./Countdown";
-import { getQueryString } from "../utils/queryString";
-import { isValidDate } from "../utils/date";
+import Countdown from "components/Countdown";
+import { getQueryString } from "utils/queryString";
+import { isValidDate, normaliseDateOrder } from "utils/date";
 
 const NEXT_YEAR = new Date(new Date().getFullYear() + 1, 0, 1, 0, 0, 0);
 
@@ -37,11 +37,17 @@ class CountdownPage extends React.Component<RouteComponentProps> {
     if (!this.interval) {
       return null;
     }
+    const { from, to, isInverted } = normaliseDateOrder(now, then);
     return (
       <div>
         <p className="text">{message}</p>
         {isValidDate(then) ? (
-          <Countdown from={now} to={then} filters={filters} />
+          <Countdown
+            from={from}
+            to={to}
+            filters={filters}
+            isInverted={isInverted}
+          />
         ) : (
           <div style={{ textAlign: "center" }}>
             Ops! Something when wrong with your date

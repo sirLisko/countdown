@@ -5,7 +5,7 @@ export const getQueryString = (search: string) => {
   const { t, m, f } = queryString.parse(search);
   return {
     then: typeof t === "string" && parseISO(t),
-    message: m,
+    message: typeof m === "string" && m,
     filters: typeof f === "string" && f.split(",")
   };
 };
