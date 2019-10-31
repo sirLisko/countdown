@@ -11,11 +11,20 @@ const Countdown: React.FC<{
   filters: string[];
   isInverted: boolean;
 }> = ({ from, to, filters, isInverted }) => {
-  const { days, hours, minutes, seconds } = getTimeDifferences(to, from);
+  const { years, days, hours, minutes, seconds } = getTimeDifferences(to, from);
   return (
     <div>
       <div className="count" style={{ display: "flex" }}>
-        <FlipNumbers number={days} isInverted={isInverted} /> :
+        {years > 0 && (
+          <>
+            <FlipNumbers number={years} isInverted={isInverted} /> y
+          </>
+        )}
+        {days > 0 && (
+          <>
+            <FlipNumbers number={days} isInverted={isInverted} /> d
+          </>
+        )}
         <FlipNumbers number={hours} isInverted={isInverted} /> :
         <FlipNumbers number={minutes} isInverted={isInverted} /> :
         <FlipNumbers number={seconds} isInverted={isInverted} />

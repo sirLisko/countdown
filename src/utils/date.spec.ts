@@ -6,11 +6,6 @@ describe("date util", () => {
       const date = new Date();
       expect(isValidDate(date)).toEqual(true);
     });
-
-    it("should return false if it is not", () => {
-      const noDate = "foo";
-      expect(isValidDate(noDate)).toEqual(false);
-    });
   });
 
   describe("normaliseDateOrder", () => {
@@ -39,9 +34,10 @@ describe("date util", () => {
     it("should not return the date inverted if then is in the future", () => {
       const now = new Date();
       const to = new Date(now.getFullYear(), 0, 1);
-      const then = new Date(now.getFullYear() + 1, 0, 1, 1, 2, 3);
+      const then = new Date(now.getFullYear() + 1, 0, 2, 1, 2, 3);
       expect(getTimeDifferences(then, to)).toEqual({
-        days: 365,
+        years: 1,
+        days: 1,
         hours: 1,
         minutes: 2,
         seconds: 3

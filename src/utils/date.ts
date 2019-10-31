@@ -1,9 +1,11 @@
 import {
   isValid,
+  differenceInYears,
   differenceInDays,
   differenceInHours,
   differenceInMinutes,
   differenceInSeconds,
+  subYears,
   subDays,
   subMinutes,
   subHours
@@ -25,8 +27,11 @@ export const normaliseDateOrder = (now: Date, then: Date) =>
       };
 
 export const getTimeDifferences = (to: Date, from: Date) => {
-  const days = differenceInDays(to, from);
-  const subbedDays = subDays(to, days);
+  const years = differenceInYears(to, from);
+  const subbedYears = subYears(to, years);
+
+  const days = differenceInDays(subbedYears, from);
+  const subbedDays = subDays(subbedYears, days);
 
   const hours = differenceInHours(subbedDays, from);
   const subbedHours = subHours(subbedDays, hours);
@@ -37,6 +42,7 @@ export const getTimeDifferences = (to: Date, from: Date) => {
   const seconds = differenceInSeconds(subbedMinutes, from);
 
   return {
+    years,
     days,
     hours,
     minutes,
