@@ -53,6 +53,7 @@ class CountdownPage extends React.Component<RouteComponentProps> {
             Ops! Something when wrong with your date
           </div>
         )}
+        <a href="/new">New</a>
       </div>
     );
   }

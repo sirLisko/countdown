@@ -1,11 +1,15 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import CountdownPage from "./components/CountdownPage";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import CountdownPage from "components/CountdownPage";
+import NewPage from "components/NewPage";
 
 const App: React.FC = () => {
   return (
     <Router>
-      <Route component={CountdownPage} />
+      <Switch>
+        <Route path="/new" component={NewPage} />
+        <Route component={CountdownPage} />
+      </Switch>
     </Router>
   );
 };

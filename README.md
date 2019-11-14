@@ -25,7 +25,7 @@ yarn start
 
 ### Example
 
-<https://fancy-countdown.netlify.com/?t=2020-01-11T00:00:00&m=to%20the%20next%20year&f=h,m,s>
+<https://countdown.sirlisko.com/?f=h,m,s&m=new%20year%27s%20eve%202020&t=2020-01-01T00%3A00>
 
 [test-image]: https://github.com/sirlisko/countdown/workflows/Test%20CI/badge.svg
 [test-url]: https://github.com/sirLisko/countdown/actions
