@@ -2,6 +2,14 @@
   "name": "countdown",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint src --ext .jsx,.js,.tsx,.ts",
+    "formatter": "prettier 'src/**/*.{js,jsx,ts,tsx}' --write"
+  },
   "dependencies": {
     "@types/jest": "24.0.18",
     "@types/node": "^12.7.12",
@@ -10,6 +18,7 @@
     "@types/react-dom": "16.9.1",
     "@types/react-router-dom": "^5.1.0",
     "@types/react-transition-group": "^4.2.3",
+    "@types/yup": "^0.26.24",
     "@typescript-eslint/eslint-plugin": "^2.6.0",
     "date-fns": "^2.4.1",
     "eslint-plugin-import": "^2.18.2",
@@ -19,18 +28,18 @@
     "query-string": "^6.8.3",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-hook-form": "^3.27.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "react-transition-group": "^4.3.0",
-    "typescript": "^3.6.4"
+    "typescript": "^3.6.4",
+    "yup": "^0.27.0"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint src --ext .jsx,.js,.tsx,.ts",
-    "formatter": "prettier 'src/**/*.{js,jsx,ts,tsx}' --write"
+  "devDependencies": {
+    "@typescript-eslint/parser": "^2.6.0",
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.5.0",
+    "prettier": "^1.18.2"
   },
   "browserslist": {
     "production": [
@@ -43,11 +52,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@typescript-eslint/parser": "^2.6.0",
-    "eslint": "^6.6.0",
-    "eslint-config-prettier": "^6.5.0",
-    "prettier": "^1.18.2"
   }
 }
