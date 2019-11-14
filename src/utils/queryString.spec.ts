@@ -19,16 +19,16 @@ describe("queryString util", () => {
 describe("createQueryString util", () => {
   it("should return the the correct query string", () => {
     const countdown = {
-      date: new Date("2000-12-20T23:00:00.000Z"),
+      date: "2000-12-20T23:00",
       message: "asd",
       filters: { hours: false, minutes: true, seconds: true }
     };
     const createdString = createQueryString(countdown);
-    expect(createdString).toEqual("f=m,s&m=asd&t=2000-12-20T23%3A00%3A00.000Z");
+    expect(createdString).toEqual("f=m,s&m=asd&t=2000-12-20T23%3A00");
   });
   it("should not return filters if none selected", () => {
     const countdown = {
-      date: new Date("2000-12-20T23:00:00.000Z"),
+      date: "2000-12-20T23:00:00.000Z",
       message: "asd",
       filters: { hours: false, minutes: false, seconds: false }
     };

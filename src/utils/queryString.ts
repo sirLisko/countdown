@@ -21,7 +21,7 @@ export const createQueryString = ({ message: m, date, filters }: Countdown) =>
   queryString.stringify(
     {
       m,
-      t: date.toISOString(),
+      t: date,
       f: filters && normalizeFilters(filters)
     },
     { arrayFormat: "comma" }

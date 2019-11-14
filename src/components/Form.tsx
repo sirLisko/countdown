@@ -1,53 +1,71 @@
 import React, { useState } from "react";
+import styled from "@emotion/styled";
 import useForm from "react-hook-form";
-import * as yup from "yup";
 
 import CountdownLink from "components/CountdownLink";
 
-const validationSchema = yup.object().shape({
-  message: yup.string(),
-  date: yup.date().required()
-});
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3rem;
+`;
 
-const Basic: React.SFC<{}> = () => {
-  const { register, handleSubmit, errors } = useForm({
-    validationSchema
-  });
-  const onSubmit = (data: any) => {
-    setCountdown(data);
-  };
+const StyledLabel = styled.label`
+  display: flex;
+  flex-direction: column;
+  width: 9rem;
+  margin: 0.25rem auto;
+`;
+
+const StyledFilter = styled.div`
+  margin: 0.25rem auto 1rem;
+  width: 9rem;
+  display: flex;
+  flex-direction: column;
+  input {
+    margin: 0.25rem 0.5rem;
+  }
+`;
+
+const Basic: React.SFC = () => {
+  const { register, handleSubmit, errors } = useForm();
   const [countdown, setCountdown] = useState();
+  const onSubmit = (formData: any) =>
+    setCountdown({ ...formData, date: `${formData.date}T${formData.time}` });
   return (
-    <form className="cippa" onSubmit={handleSubmit(onSubmit)}>
-      <label>
+    <StyledForm onSubmit={handleSubmit(onSubmit)}>
+      <StyledLabel>
         Message
         <input type="text" name="message" ref={register} />
-      </label>
-      <label>
+      </StyledLabel>
+      <StyledLabel>
         Date
-        <input
-          type="text"
-          name="date"
-          placeholder="mm-dd-yyyy"
-          ref={register}
-        />
-      </label>
-      {errors.date && <p>{errors.date.message}</p>}
-      <label>
-        hours
-        <input type="checkbox" name="filters.hours" ref={register} />
-      </label>
-      <label>
-        minutes
-        <input type="checkbox" name="filters.minutes" ref={register} />
-      </label>
-      <label>
-        seconds
-        <input type="checkbox" name="filters.seconds" ref={register} />
-      </label>
-      <input type="submit" />
+        <input type="date" name="date" required ref={register} />
+      </StyledLabel>
+      <StyledLabel>
+        Time
+        <input type="time" name="time" defaultValue="00:00" ref={register} />
+      </StyledLabel>
+      {errors.date && <p>{errors.date.message} You need to set a valid date</p>}
+      <StyledFilter>
+        <span>Add extra countdown for:</span>
+        <label>
+          <input type="checkbox" name="filters.hours" ref={register} />
+          hours
+        </label>
+        <label>
+          <input type="checkbox" name="filters.minutes" ref={register} />
+          minutes
+        </label>
+        <label>
+          <input type="checkbox" name="filters.seconds" ref={register} />
+          seconds
+        </label>
+      </StyledFilter>
+      <button type="submit">Create!</button>
       {countdown && <CountdownLink countdown={countdown} />}
-    </form>
+    </StyledForm>
   );
 };
 
