@@ -7,7 +7,7 @@ export const getQueryString = (search: string) => {
   return {
     then: typeof t === "string" && parseISO(t),
     message: typeof m === "string" && m,
-    filters: typeof f === "string" && f.split(",")
+    filters: typeof f === "string" && f.split(","),
   };
 };
 
@@ -22,7 +22,7 @@ export const createQueryString = ({ message: m, date, filters }: Countdown) =>
     {
       m,
       t: date,
-      f: filters && normalizeFilters(filters)
+      f: filters && normalizeFilters(filters),
     },
     { arrayFormat: "comma" }
   );

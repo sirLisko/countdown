@@ -8,22 +8,22 @@ import {
   subYears,
   subDays,
   subMinutes,
-  subHours
+  subHours,
 } from "date-fns";
 
-export const isValidDate = (date: Date): Boolean => date && isValid(date);
+export const isValidDate = (date: Date): boolean => date && isValid(date);
 
 export const normaliseDateOrder = (now: Date, then: Date) =>
   now.getTime() < then.getTime()
     ? {
         from: now,
         to: then,
-        isInverted: false
+        isInverted: false,
       }
     : {
         from: then,
         to: now,
-        isInverted: true
+        isInverted: true,
       };
 
 export const getTimeDifferences = (to: Date, from: Date) => {
@@ -46,6 +46,6 @@ export const getTimeDifferences = (to: Date, from: Date) => {
     days,
     hours,
     minutes,
-    seconds
+    seconds,
   };
 };

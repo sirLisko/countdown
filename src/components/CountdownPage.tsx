@@ -12,9 +12,9 @@ class CountdownPage extends React.Component<RouteComponentProps> {
     now: new Date(),
     then: NEXT_YEAR,
     message: "to the next year",
-    filters: []
+    filters: [],
   };
-  private interval: any;
+  private interval: null | ReturnType<typeof setTimeout> = null;
 
   componentDidMount() {
     const { location } = this.props;
@@ -24,12 +24,12 @@ class CountdownPage extends React.Component<RouteComponentProps> {
     this.setState({
       message: then ? message : message || defaultMessage,
       then: then || defaultThen,
-      filters: filters
+      filters: filters,
     });
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
+    this.interval && clearInterval(this.interval);
   }
 
   render() {

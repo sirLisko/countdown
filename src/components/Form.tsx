@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
-import useForm from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 import CountdownLink from "components/CountdownLink";
+import { Countdown } from "types";
 
 const StyledForm = styled.form`
   display: flex;
@@ -30,8 +31,8 @@ const StyledFilter = styled.div`
 
 const Basic: React.SFC = () => {
   const { register, handleSubmit, errors } = useForm();
-  const [countdown, setCountdown] = useState();
-  const onSubmit = (formData: any) =>
+  const [countdown, setCountdown] = useState<Countdown>();
+  const onSubmit: SubmitHandler<Countdown> = (formData) =>
     setCountdown({ ...formData, date: `${formData.date}T${formData.time}` });
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>

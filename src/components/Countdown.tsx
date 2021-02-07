@@ -5,12 +5,9 @@ import { getTimeDifferences } from "utils/date";
 import FlipNumbers from "components/FlipNumbers";
 import CountdownFilters from "components/CountdownFilters";
 
-const Countdown: React.FC<{
-  from: Date;
-  to: Date;
-  filters: string[];
-  isInverted: boolean;
-}> = ({ from, to, filters, isInverted }) => {
+import { CountdownFromString } from "types";
+
+const Countdown = ({ from, to, filters, isInverted }: CountdownFromString) => {
   const { years, days, hours, minutes, seconds } = getTimeDifferences(to, from);
   return (
     <div>

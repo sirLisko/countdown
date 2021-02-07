@@ -8,5 +8,13 @@ export type Filter = {
 export interface Countdown {
   message?: string;
   date: string;
+  time?: string;
   filters?: Filter;
+}
+
+export interface CountdownFromString {
+  from: Date;
+  to: Date;
+  filters: string[];
+  isInverted?: boolean;
 }

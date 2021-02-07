@@ -15,7 +15,7 @@ describe("date util", () => {
       expect(normaliseDateOrder(now, then)).toEqual({
         from: now,
         to: then,
-        isInverted: false
+        isInverted: false,
       });
     });
 
@@ -25,7 +25,7 @@ describe("date util", () => {
       expect(normaliseDateOrder(now, then)).toEqual({
         from: then,
         to: now,
-        isInverted: true
+        isInverted: true,
       });
     });
   });
@@ -40,7 +40,7 @@ describe("date util", () => {
         days: 1,
         hours: 1,
         minutes: 2,
-        seconds: 3
+        seconds: 3,
       });
     });
   });

@@ -1,7 +1,7 @@
 import {
   getQueryString,
   createQueryString,
-  normalizeFilters
+  normalizeFilters,
 } from "./queryString";
 
 describe("queryString util", () => {
@@ -11,7 +11,7 @@ describe("queryString util", () => {
     expect(parsedString).toEqual({
       filters: ["h"],
       message: "to the next year",
-      then: new Date("2020-01-10T23:00:00.000Z")
+      then: new Date("2020-01-10T23:00:00.000Z"),
     });
   });
 });
@@ -21,7 +21,7 @@ describe("createQueryString util", () => {
     const countdown = {
       date: "2000-12-20T23:00",
       message: "asd",
-      filters: { hours: false, minutes: true, seconds: true }
+      filters: { hours: false, minutes: true, seconds: true },
     };
     const createdString = createQueryString(countdown);
     expect(createdString).toEqual("f=m,s&m=asd&t=2000-12-20T23%3A00");
@@ -30,7 +30,7 @@ describe("createQueryString util", () => {
     const countdown = {
       date: "2000-12-20T23:00:00.000Z",
       message: "asd",
-      filters: { hours: false, minutes: false, seconds: false }
+      filters: { hours: false, minutes: false, seconds: false },
     };
     const createdString = createQueryString(countdown);
     expect(createdString).toEqual("m=asd&t=2000-12-20T23%3A00%3A00.000Z");
@@ -42,7 +42,7 @@ describe("normalizeFilters util", () => {
     const filters = {
       hours: true,
       minutes: false,
-      seconds: true
+      seconds: true,
     };
     expect(normalizeFilters(filters)).toEqual(["h", "s"]);
   });
@@ -50,7 +50,7 @@ describe("normalizeFilters util", () => {
     const filters = {
       hours: false,
       minutes: false,
-      seconds: false
+      seconds: false,
     };
     expect(normalizeFilters(filters)).toEqual([]);
   });
