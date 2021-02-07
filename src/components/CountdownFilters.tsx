@@ -5,11 +5,9 @@ import {
   differenceInSeconds
 } from "date-fns";
 
-const Countdown: React.FC<{ from: Date; to: Date; filters: string[] }> = ({
-  from,
-  to,
-  filters
-}) => (
+import { CountdownFromString } from "types";
+
+const Countdown = ({ from, to, filters }: CountdownFromString) => (
   <div style={{ textAlign: "center" }}>
     {filters.includes("h") && <p>hours: {differenceInHours(to, from)}</p>}
     {filters.includes("m") && <p>minutes: {differenceInMinutes(to, from)}</p>}

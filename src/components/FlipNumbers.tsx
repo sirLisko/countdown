@@ -1,11 +1,19 @@
 import React from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-const SlideTransition: React.FC<{
+interface ISlideTransition {
   id: string;
   style?: object;
-  isInverted: boolean;
-}> = ({ id, children, style, isInverted }) => (
+  isInverted?: boolean;
+  children: React.ReactNode;
+}
+
+const SlideTransition = ({
+  id,
+  children,
+  style,
+  isInverted
+}: ISlideTransition) => (
   <TransitionGroup>
     <CSSTransition
       key={id}
@@ -19,9 +27,12 @@ const SlideTransition: React.FC<{
   </TransitionGroup>
 );
 
-const FlipNumbers: React.FC<{ number: number; isInverted: boolean }> = ({
+const FlipNumbers = ({
   number,
   isInverted
+}: {
+  number: number;
+  isInverted?: boolean;
 }) => {
   const numbers = number > 9 ? number.toString() : "0" + number.toString();
   return (

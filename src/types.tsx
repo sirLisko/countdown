@@ -10,3 +10,10 @@ export interface Countdown {
   date: string;
   filters?: Filter;
 }
+
+export interface CountdownFromString {
+  from: Date;
+  to: Date;
+  filters: string[];
+  isInverted?: boolean;
+}
