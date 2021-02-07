@@ -2,7 +2,7 @@ import React from "react";
 import {
   differenceInHours,
   differenceInMinutes,
-  differenceInSeconds
+  differenceInSeconds,
 } from "date-fns";
 
 import { CountdownFromString } from "types";

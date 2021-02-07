@@ -3,7 +3,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 interface ISlideTransition {
   id: string;
-  style?: object;
+  style?: Record<string, unknown>;
   isInverted?: boolean;
   children: React.ReactNode;
 }
@@ -12,7 +12,7 @@ const SlideTransition = ({
   id,
   children,
   style,
-  isInverted
+  isInverted,
 }: ISlideTransition) => (
   <TransitionGroup>
     <CSSTransition
@@ -29,7 +29,7 @@ const SlideTransition = ({
 
 const FlipNumbers = ({
   number,
-  isInverted
+  isInverted,
 }: {
   number: number;
   isInverted?: boolean;
@@ -41,7 +41,7 @@ const FlipNumbers = ({
       style={{
         width: `${numbers.length}em`,
         margin: "0 auto",
-        position: "relative"
+        position: "relative",
       }}
     >
       {numbers

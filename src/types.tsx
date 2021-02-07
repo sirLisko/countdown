@@ -8,6 +8,7 @@ export type Filter = {
 export interface Countdown {
   message?: string;
   date: string;
+  time?: string;
   filters?: Filter;
 }
 
