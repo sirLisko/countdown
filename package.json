@@ -8,6 +8,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src --ext .tsx,.ts",
+    "type-check": "tsc",
     "formatter": "prettier 'src/**/*.{ts,tsx}' --write"
   },
   "dependencies": {
