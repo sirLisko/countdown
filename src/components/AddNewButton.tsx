@@ -13,6 +13,7 @@ const NewButton = styled.a`
   white-space: nowrap;
   transition: width ease 200ms;
   color: white;
+  z-index: 1;
   &:hover {
     width: 17rem;
     padding-left: 1.5rem;

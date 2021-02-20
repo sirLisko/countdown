@@ -7,7 +7,12 @@ body {
 .text {
   text-align: center;
   margin: 10vh auto;
-  font-size: 5vw;
+  font-size: 2.5rem;
+}
+@media (min-width: 700px) {
+  .text {
+    font-size: 5vw;
+  }
 }
 .count {
   font-size: 7vw;

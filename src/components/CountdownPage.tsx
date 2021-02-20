@@ -56,7 +56,7 @@ class CountdownPage extends React.Component<RouteComponentProps> {
           </div>
         )}
         <AddNewButton />
-        <Footer />
+        <Footer isFixed />
       </div>
     );
   }
