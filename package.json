@@ -12,8 +12,8 @@
     "formatter": "prettier 'src/**/*.{ts,tsx}' --write"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.22",
-    "@emotion/styled": "^10.0.23",
+    "@emotion/react": "^11.1.5",
+    "@emotion/styled": "^11.1.5",
     "@types/jest": "26.0.20",
     "@types/node": "^14.14.25",
     "@types/react": "17.0.1",
@@ -26,6 +26,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hook-form": "^6.15.1",
+    "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
     "react-transition-group": "^4.4.1",
@@ -41,6 +42,9 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
     "prettier": "^2.2.1"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.0.0"
   },
   "browserslist": {
     "production": [

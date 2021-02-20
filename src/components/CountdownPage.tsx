@@ -2,6 +2,8 @@ import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 
 import Countdown from "components/Countdown";
+import AddNewButton from "components/AddNewButton";
+import Footer from "components/Footer";
 import { getQueryString } from "utils/queryString";
 import { isValidDate, normaliseDateOrder } from "utils/date";
 
@@ -53,7 +55,8 @@ class CountdownPage extends React.Component<RouteComponentProps> {
             Ops! Something when wrong with your date
           </div>
         )}
-        <a href="/new">New</a>
+        <AddNewButton />
+        <Footer />
       </div>
     );
   }
