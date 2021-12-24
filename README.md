@@ -3,13 +3,13 @@
 ## Install dependencies
 
 ```bash
-yarn
+npm
 ```
 
 ## Run it locally
 
 ```bash
-yarn start
+npm start
 ```
 
 ## The stack
@@ -18,7 +18,6 @@ yarn start
 - Typecheck and superset of JS by [Typescript](https://www.typescriptlang.org/)
 - Check the syntax and formatting of the JS, via [ESLint](http://eslint.org/) and [Prettier](https://prettier.io/)
 - Unit tests with [Jest](https://jestjs.io)
-- Dependencies management using [Yarn](https://yarnpkg.com/lang/en/)
 - CI using [Github Actions](https://github.com/features/actions)
 - Style components with [Emotion](https://emotion.sh) using [Babel Macros](https://emotion.sh/docs/babel-macros)
 - Hosted on [Netlify](https://netlify.com)

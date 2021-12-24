@@ -13,10 +13,10 @@ jobs:
         with:
           node-version: 14
       - name: Install dependencies
-        run: yarn
+        run: npm install
         env:
           CI: true
       - name: Linter
-        run: yarn lint
+        run: npm run lint
       - name: Type checking
-        run: yarn type-check
+        run: npm run type-check
