@@ -23,6 +23,13 @@ class CountdownPage extends React.Component<RouteComponentProps> {
     const { message: defaultMessage, then: defaultThen } = this.state;
     this.interval = setInterval(() => this.setState({ now: new Date() }), 1000);
     const { then, message, filters } = getQueryString(location.search);
+    if (message && then) {
+      document.title =
+        new Date().getTime() < then.getTime()
+          ? `${message} - How much time? - Fancy Countdown`
+          : `${message} - How long ago? - Fancy Countdown`;
+    }
+
     this.setState({
       message: then ? message : message || defaultMessage,
       then: then || defaultThen,
