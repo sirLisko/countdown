@@ -39,7 +39,7 @@ const FlipNumbers = ({
     <div
       className="numbers"
       style={{
-        width: `${numbers.length}em`,
+        width: `${numbers.length * 0.8}em`,
         margin: "0 auto",
         position: "relative",
       }}

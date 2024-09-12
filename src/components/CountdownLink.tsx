@@ -1,30 +1,11 @@
-import React, { useEffect, useState } from "react";
-import styled from "@emotion/styled/macro";
+import { useEffect, useState } from "react";
 import {
   HiLink as LinkIcon,
   HiDocumentDuplicate as CopyIcon,
 } from "react-icons/hi";
 
-import { createQueryString } from "utils/queryString";
-import { Countdown } from "types";
-
-const StyledLinks = styled.div`
-  font-size: 2rem;
-  align-items: center;
-  text-align: center;
-  a {
-    display: block;
-    font-size: 1.5rem;
-  }
-`;
-const StyledLink = styled.a`
-  margin: 2rem auto 1rem;
-`;
-const StyledButton = styled.a`
-  border: 0;
-  background: none;
-  cursor: pointer;
-`;
+import { createQueryString } from "../utils/queryString";
+import { Countdown } from "../types";
 
 const CountdownLink = ({ countdown }: { countdown: Countdown }) => {
   const [isCopied, setIsCopied] = useState(false);
@@ -34,19 +15,19 @@ const CountdownLink = ({ countdown }: { countdown: Countdown }) => {
     setIsCopied(false);
   }, [countdown]);
   return (
-    <StyledLinks>
-      <StyledLink href={link}>
+    <div>
+      <a href={link}>
         {link} <LinkIcon />
-      </StyledLink>
-      <StyledButton
+      </a>
+      <a
         onClick={() => {
           navigator.clipboard.writeText(link);
           setIsCopied(true);
         }}
       >
         {isCopied ? "Copied" : "Copy"} <CopyIcon />
-      </StyledButton>
-    </StyledLinks>
+      </a>
+    </div>
   );
 };
 

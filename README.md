@@ -2,14 +2,16 @@
 
 ## Install dependencies
 
+> this project is using [pnpm](https://pnpm.io/) as package manager but it should work with npm as well
+
 ```bash
-npm
+pnpm install
 ```
 
 ## Run it locally
 
 ```bash
-npm start
+pnpm start
 ```
 
 ## The stack

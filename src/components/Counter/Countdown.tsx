@@ -1,25 +1,23 @@
-import React from "react";
+import { getTimeDifferences } from "../../utils/date";
 
-import { getTimeDifferences } from "utils/date";
+import FlipNumbers from "./FlipNumbers";
+import CountdownFilters from "../CountdownFilters";
 
-import FlipNumbers from "components/FlipNumbers";
-import CountdownFilters from "components/CountdownFilters";
-
-import { CountdownFromString } from "types";
+import { CountdownFromString } from "../../types";
 
 const Countdown = ({ from, to, filters, isInverted }: CountdownFromString) => {
   const { years, days, hours, minutes, seconds } = getTimeDifferences(to, from);
   return (
-    <div>
-      <div className="count" style={{ display: "flex" }}>
+    <div style={{ margin: "20vh auto" }}>
+      <div className="text-[7vw] flex">
         {years > 0 && (
           <>
-            <FlipNumbers number={years} isInverted={isInverted} /> y
+            <FlipNumbers number={years} isInverted={isInverted} />y
           </>
         )}
         {days > 0 && (
           <>
-            <FlipNumbers number={days} isInverted={isInverted} /> d
+            <FlipNumbers number={days} isInverted={isInverted} />d
           </>
         )}
         <FlipNumbers number={hours} isInverted={isInverted} /> :
