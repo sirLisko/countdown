@@ -15,7 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "./ui/checkbox";
 import { Label } from "./ui/label";
-import { CopyIcon } from "@radix-ui/react-icons";
+import { CopyIcon, ExternalLinkIcon } from "@radix-ui/react-icons";
 import { createQueryString } from "@/utils/queryString";
 import { useState } from "react";
 import { Countdown } from "@/types";
@@ -186,6 +186,11 @@ export function InputForm() {
               <CopyIcon className="h-4 w-4" />
             </Button>
           </DialogClose>
+          <Button size="sm" className="px-3" asChild>
+            <a href={link} target="_blank" rel="noopener noreferrer">
+              <ExternalLinkIcon className="h-4 w-4" />
+            </a>
+          </Button>
         </div>
       )}
     </Form>
