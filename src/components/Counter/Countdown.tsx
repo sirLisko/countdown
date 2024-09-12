@@ -1,7 +1,7 @@
 import { getTimeDifferences } from "../../utils/date";
 
 import FlipNumbers from "./FlipNumbers";
-import CountdownFilters from "../CountdownFilters";
+import CountdownFilters from "./CountdownFilters";
 
 import { CountdownFromString } from "../../types";
 

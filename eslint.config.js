@@ -29,5 +29,6 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
     },
+    ignores: ["src/components/ui/**/*", "src/hooks/use-toast.ts"],
   },
 );

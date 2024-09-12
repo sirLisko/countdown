@@ -4,7 +4,7 @@ import {
   differenceInSeconds,
 } from "date-fns";
 
-import { CountdownFromString } from "../types";
+import { CountdownFromString } from "../../types";
 
 const Countdown = ({ from, to, filters }: CountdownFromString) => (
   <div style={{ textAlign: "center" }}>

@@ -1,6 +1,6 @@
 import queryString from "query-string";
 import { parseISO } from "date-fns";
-import { Countdown, Filter } from "@/types";
+import { Countdown } from "@/types";
 
 export const getQueryString = (search: string) => {
   const { t, m, f } = queryString.parse(search);
@@ -11,18 +11,12 @@ export const getQueryString = (search: string) => {
   };
 };
 
-export const normalizeFilters = (filters: Filter) =>
-  Object.keys(filters).reduce(
-    (acc: string[], key: string) => (filters[key] ? [...acc, key[0]] : acc),
-    [],
-  );
-
 export const createQueryString = ({ message: m, date, filters }: Countdown) =>
   queryString.stringify(
     {
       m,
       t: date,
-      f: filters && normalizeFilters(filters),
+      f: filters.length ? filters.join(",") : undefined,
     },
     { arrayFormat: "comma" },
   );

@@ -1,16 +1,13 @@
-export type Filter = {
-  [key: string]: boolean;
-  hours: boolean;
-  minutes: boolean;
-  seconds: boolean;
-};
+import { z } from "zod";
 
-export interface Countdown {
-  message?: string;
-  date: string;
-  time?: string;
-  filters?: Filter;
-}
+export const Countdown = z.object({
+  message: z.string().optional(),
+  date: z.string().optional(),
+  time: z.string().optional(),
+  filters: z.array(z.string()),
+});
+
+export type Countdown = z.infer<typeof Countdown>;
 
 export interface CountdownFromString {
   from: Date;

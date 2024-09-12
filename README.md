@@ -16,13 +16,16 @@ pnpm start
 
 ## The stack
 
-- WebApp scaffolded via [Create React App](https://github.com/facebook/create-react-app)
+- WebApp scaffolded via [Vite](https://vitejs.dev/)
 - Typecheck and superset of JS by [Typescript](https://www.typescriptlang.org/)
 - Check the syntax and formatting of the JS, via [ESLint](http://eslint.org/) and [Prettier](https://prettier.io/)
-- Unit tests with [Jest](https://jestjs.io)
+- Unit tests with [Vitest](https://vitest.dev/)
 - CI using [Github Actions](https://github.com/features/actions)
-- Style components with [Emotion](https://emotion.sh) using [Babel Macros](https://emotion.sh/docs/babel-macros)
+- Styling [Tailwind CSS](https://tailwindcss.com/)
+- UI Components [Shadcn/ui](https://ui.shadcn.com)
 - Hosted on [Netlify](https://netlify.com)
+
+It's possible to [check out the v1 of the project](https://github.com/sirLisko/countdown/tree/v0.1), running Create React App, Jest, Emotion and Babel Macros.
 
 ### Example
 

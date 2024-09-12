@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Countdown from "../Counter/Countdown";
-import { getQueryString } from "../../utils/queryString";
-import { isValidDate, normaliseDateOrder } from "../../utils/date";
-import Footer from "../Footer";
-import { Button } from "../ui/button";
+import Countdown from "./Counter/Countdown";
+import { getQueryString } from "../utils/queryString";
+import { isValidDate, normaliseDateOrder } from "../utils/date";
+import Footer from "./Footer";
+import { DialogCloseButton } from "./Dialog";
 
 const NEXT_YEAR = new Date(new Date().getFullYear() + 1, 0, 1, 0, 0, 0);
 
@@ -57,7 +57,7 @@ const CountdownPage: React.FC = () => {
         isInverted={isInverted}
       />
       <div className="text-center">
-        <Button variant="default">Create your countdown</Button>
+        <DialogCloseButton />
       </div>
       <Footer />
     </div>
