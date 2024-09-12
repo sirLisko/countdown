@@ -1,72 +1,67 @@
-import React from "react";
-import { RouteComponentProps } from "react-router-dom";
-
-import Countdown from "components/Countdown";
-import AddNewButton from "components/AddNewButton";
-import Footer from "components/Footer";
-import { getQueryString } from "utils/queryString";
-import { isValidDate, normaliseDateOrder } from "utils/date";
+import React, { useState, useEffect } from "react";
+import Countdown from "./Counter/Countdown";
+import { getQueryString } from "../utils/queryString";
+import { isValidDate, normaliseDateOrder } from "../utils/date";
+import Footer from "./Footer";
+import { DialogCloseButton } from "./Dialog";
 
 const NEXT_YEAR = new Date(new Date().getFullYear() + 1, 0, 1, 0, 0, 0);
 
-class CountdownPage extends React.Component<RouteComponentProps> {
-  readonly state = {
-    now: new Date(),
-    then: NEXT_YEAR,
-    message: "to the next year",
-    filters: [],
-  };
-  private interval: null | ReturnType<typeof setTimeout> = null;
+const CountdownPage: React.FC = () => {
+  const [now, setNow] = useState(new Date());
+  const [then, setThen] = useState(NEXT_YEAR);
+  const [message, setMessage] = useState("to the next year");
+  const [filters, setFilters] = useState<string[]>([]);
 
-  componentDidMount() {
-    const { location } = this.props;
-    const { message: defaultMessage, then: defaultThen } = this.state;
-    this.interval = setInterval(() => this.setState({ now: new Date() }), 1000);
-    const { then, message, filters } = getQueryString(location.search);
-    if (message && then) {
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+
+    const interval = setInterval(() => setNow(new Date()), 1000);
+    const qs = searchParams && getQueryString(searchParams.toString());
+
+    if (qs && qs.message && qs.then) {
+      const { message: qsMessage, then: qsThen, filters: qsFilters } = qs;
+
       document.title =
-        new Date().getTime() < then.getTime()
-          ? `${message} - How much time? - Fancy Countdown`
-          : `${message} - How long ago? - Fancy Countdown`;
+        new Date().getTime() < qsThen.getTime()
+          ? `${qsMessage} - How much time? - Fancy Countdown`
+          : `${qsMessage} - How long ago? - Fancy Countdown`;
+
+      setMessage(qsMessage);
+      setThen(qsThen);
+      if (qsFilters) setFilters(qsFilters);
     }
 
-    this.setState({
-      message: then ? message : message || defaultMessage,
-      then: then || defaultThen,
-      filters: filters,
-    });
-  }
+    return () => clearInterval(interval);
+  }, []);
 
-  componentWillUnmount() {
-    this.interval && clearInterval(this.interval);
-  }
+  const { from, to, isInverted } = normaliseDateOrder(now, then);
 
-  render() {
-    const { now, message, then, filters } = this.state;
-    if (!this.interval) {
-      return null;
-    }
-    const { from, to, isInverted } = normaliseDateOrder(now, then);
+  if (!isValidDate(then)) {
     return (
-      <div>
-        <p className="text">{message}</p>
-        {isValidDate(then) ? (
-          <Countdown
-            from={from}
-            to={to}
-            filters={filters}
-            isInverted={isInverted}
-          />
-        ) : (
-          <div style={{ textAlign: "center" }}>
-            Ops! Something when wrong with your date
-          </div>
-        )}
-        <AddNewButton />
-        <Footer isFixed />
+      <div style={{ textAlign: "center" }}>
+        Oops! Something went wrong with your date
       </div>
     );
   }
-}
+
+  return (
+    <div className="">
+      <h1 className="text-center my-[10vh] mx-auto text-[2.5rem] md:text-[5vw] text-gray-800">
+        {message}
+      </h1>
+      <Countdown
+        from={from}
+        to={to}
+        filters={filters}
+        isInverted={isInverted}
+      />
+      <div className="text-center">
+        <DialogCloseButton />
+      </div>
+      <Footer />
+    </div>
+  );
+};
 
 export default CountdownPage;

@@ -1,6 +1,17 @@
 import { isValidDate, normaliseDateOrder, getTimeDifferences } from "./date";
 
 describe("date util", () => {
+  beforeAll(() => {
+    const date = new Date(1998, 11, 19);
+
+    vi.useFakeTimers();
+    vi.setSystemTime(date);
+  });
+
+  afterAll(() => {
+    vi.useRealTimers();
+  });
+
   describe("isValidDate", () => {
     it("should return true if it is", () => {
       const date = new Date();
