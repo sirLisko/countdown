@@ -37,7 +37,7 @@ const filters = [
   },
 ] as const;
 
-export function InputForm() {
+const InputForm = () => {
   const [link, setLink] = useState<string | undefined>("");
   const [isTouchDevice, setIsTouchDevice] = useState(false);
 
@@ -223,4 +223,6 @@ export function InputForm() {
       )}
     </Form>
   );
-}
+};
+
+export default InputForm;
