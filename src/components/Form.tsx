@@ -15,9 +15,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "./ui/checkbox";
 import { Label } from "./ui/label";
-import { CopyIcon, ExternalLinkIcon } from "@radix-ui/react-icons";
+import { CopyIcon, ExternalLinkIcon, Share1Icon } from "@radix-ui/react-icons";
 import { createQueryString } from "@/utils/queryString";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Countdown } from "@/types";
 import type { Countdown as CountdownType } from "@/types";
 import { DialogClose } from "./ui/dialog";
@@ -39,6 +39,8 @@ const filters = [
 
 export function InputForm() {
   const [link, setLink] = useState<string | undefined>("");
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
   const form = useForm<CountdownType>({
     mode: "onTouched",
     resolver: zodResolver(Countdown),
@@ -50,6 +52,15 @@ export function InputForm() {
   });
   const { toast } = useToast();
   const { isValid } = form.formState;
+
+  useEffect(() => {
+    const checkTouchDevice = () => {
+      setIsTouchDevice(
+        "ontouchstart" in window || navigator.maxTouchPoints > 0,
+      );
+    };
+    checkTouchDevice();
+  }, []);
 
   function onSubmit(data: CountdownType) {
     if (isValid && data.date) {
@@ -63,16 +74,22 @@ export function InputForm() {
   function onCopy() {
     if (!link) return;
     navigator.clipboard.writeText(link);
-    setTimeout(() => {
-      toast({
-        description: "Countdown copied to clipboard",
-      });
-    }, 0);
+    toast({
+      description: "Countdown copied to clipboard",
+    });
+  }
+
+  function onShare() {
+    if (!link) return;
+    navigator.share({
+      url: link,
+      title: `${form.getValues("message")} Countdown`,
+    });
   }
 
   return (
     <Form {...form}>
-      <form onChange={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+      <form onChange={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField
           control={form.control}
           name="message"
@@ -86,40 +103,42 @@ export function InputForm() {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="date"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Date</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  type="date"
-                  className="flex flex-col justify-center"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="time"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Time</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  type="time"
-                  className="flex flex-col justify-center"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="grid grid-cols-2 gap-4">
+          <FormField
+            control={form.control}
+            name="date"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Date</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    type="date"
+                    className="flex flex-col justify-center"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="time"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Time</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    type="time"
+                    className="flex flex-col justify-center"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         <FormField
           control={form.control}
           name="filters"
@@ -133,59 +152,68 @@ export function InputForm() {
                   Optional, they will be displayed below the main countdown.
                 </FormDescription>
               </div>
-              {filters.map((item) => (
-                <FormField
-                  key={item.id}
-                  control={form.control}
-                  name="filters"
-                  render={({ field }) => {
-                    return (
-                      <FormItem
-                        key={item.id}
-                        className="flex flex-row items-start space-x-3 space-y-0"
-                      >
-                        <FormControl>
-                          <Checkbox
-                            checked={field.value?.includes(item.id)}
-                            onCheckedChange={(checked) => {
-                              console.log(field.value, item.id);
-                              return checked
-                                ? field.onChange([...field.value, item.id])
-                                : field.onChange(
-                                    field.value?.filter(
-                                      (value) => value !== item.id,
-                                    ),
-                                  );
-                            }}
-                          />
-                        </FormControl>
-                        <FormLabel className="text-sm font-normal">
-                          {item.label}
-                        </FormLabel>
-                      </FormItem>
-                    );
-                  }}
-                />
-              ))}
+              <div className="flex space-x-4">
+                {filters.map((item) => (
+                  <FormField
+                    key={item.id}
+                    control={form.control}
+                    name="filters"
+                    render={({ field }) => {
+                      return (
+                        <FormItem
+                          key={item.id}
+                          className="flex flex-row items-center space-x-3 space-y-0"
+                        >
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value?.includes(item.id)}
+                              onCheckedChange={(checked) => {
+                                console.log(field.value, item.id);
+                                return checked
+                                  ? field.onChange([...field.value, item.id])
+                                  : field.onChange(
+                                      field.value?.filter(
+                                        (value) => value !== item.id,
+                                      ),
+                                    );
+                              }}
+                            />
+                          </FormControl>
+                          <FormLabel className="text-sm font-normal">
+                            {item.label}
+                          </FormLabel>
+                        </FormItem>
+                      );
+                    }}
+                  />
+                ))}
+              </div>
               <FormMessage />
             </FormItem>
           )}
         />
       </form>
       {link && (
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 mt-5">
           <div className="grid flex-1 gap-2">
             <Label htmlFor="link" className="sr-only">
               Link
             </Label>
             <Input id="link" value={link} readOnly />
           </div>
-          <DialogClose asChild>
-            <Button type="submit" size="sm" className="px-3" onClick={onCopy}>
-              <span className="sr-only">Copy</span>
-              <CopyIcon className="h-4 w-4" />
+          {isTouchDevice ? (
+            <Button type="submit" size="sm" className="px-3" onClick={onShare}>
+              <span className="sr-only">Share</span>
+              <Share1Icon className="h-4 w-4" />
             </Button>
-          </DialogClose>
+          ) : (
+            <DialogClose asChild>
+              <Button type="submit" size="sm" className="px-3" onClick={onCopy}>
+                <span className="sr-only">Copy</span>
+                <CopyIcon className="h-4 w-4" />
+              </Button>
+            </DialogClose>
+          )}
           <Button size="sm" className="px-3" asChild>
             <a href={link} target="_blank" rel="noopener noreferrer">
               <ExternalLinkIcon className="h-4 w-4" />
