@@ -3,7 +3,7 @@ import Countdown from "./Counter/Countdown";
 import { getQueryString } from "../utils/queryString";
 import { isValidDate, normaliseDateOrder } from "../utils/date";
 import Footer from "./Footer";
-import { DialogCloseButton } from "./Dialog";
+import DialogNew from "./DialogNew";
 
 const NEXT_YEAR = new Date(new Date().getFullYear() + 1, 0, 1, 0, 0, 0);
 
@@ -46,7 +46,7 @@ const CountdownPage: React.FC = () => {
   }
 
   return (
-    <div className="">
+    <>
       <h1 className="text-center my-[10vh] mx-auto text-[2.5rem] md:text-[5vw] text-gray-800">
         {message}
       </h1>
@@ -57,10 +57,10 @@ const CountdownPage: React.FC = () => {
         isInverted={isInverted}
       />
       <div className="text-center">
-        <DialogCloseButton />
+        <DialogNew />
       </div>
       <Footer />
-    </div>
+    </>
   );
 };
 
