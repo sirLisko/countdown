@@ -19,16 +19,16 @@ const CountdownPage: React.FC = () => {
     const interval = setInterval(() => setNow(new Date()), 1000);
     const qs = searchParams && getQueryString(searchParams.toString());
 
-    if (qs && qs.message && qs.then) {
+    if (qs && qs.then) {
       const { message: qsMessage, then: qsThen, filters: qsFilters } = qs;
 
       document.title =
         new Date().getTime() < qsThen.getTime()
-          ? `${qsMessage} - How much time? - Fancy Countdown`
-          : `${qsMessage} - How long ago? - Fancy Countdown`;
+          ? `${qsMessage ? qsMessage + " - " : ""}How much time left? - Countdown`
+          : `${qsMessage ? qsMessage + " - " : ""}How long ago? - Countdown`;
 
-      setMessage(qsMessage);
       setThen(qsThen);
+      setMessage(qsMessage || "\u00A0");
       if (qsFilters) setFilters(qsFilters);
     }
 
