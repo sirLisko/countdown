@@ -1,0 +1,5 @@
+[build]
+command = "pnpm build"
+publish = "dist"
+
+# Redirects are in /public/_redirects
