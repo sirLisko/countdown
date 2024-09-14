@@ -9,8 +9,8 @@ const NEXT_YEAR = new Date(new Date().getFullYear() + 1, 0, 1, 0, 0, 0);
 
 const CountdownPage: React.FC = () => {
   const [now, setNow] = useState(new Date());
-  const [then, setThen] = useState(NEXT_YEAR);
-  const [message, setMessage] = useState("to the next year");
+  const [then, setThen] = useState<Date>();
+  const [message, setMessage] = useState<string>();
   const [filters, setFilters] = useState<string[]>([]);
 
   useEffect(() => {
@@ -30,10 +30,17 @@ const CountdownPage: React.FC = () => {
       setThen(qsThen);
       setMessage(qsMessage || "\u00A0");
       if (qsFilters) setFilters(qsFilters);
+    } else {
+      setThen(NEXT_YEAR);
+      setMessage("to the next year");
     }
 
     return () => clearInterval(interval);
   }, []);
+
+  if (!then) {
+    return null;
+  }
 
   const { from, to, isInverted } = normaliseDateOrder(now, then);
 
