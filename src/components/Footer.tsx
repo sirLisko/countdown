@@ -5,7 +5,7 @@ const Footer = () => (
         Created with ❤ by{" "}
         <a
           className="underline"
-          href="https://sirilisko.com"
+          href="https://sirlisko.com"
           target="_blank"
           rel="noopener noreferrer"
         >
