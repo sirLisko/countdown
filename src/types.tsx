@@ -3,7 +3,7 @@ import { z } from "zod";
 export const Countdown = z.object({
   message: z.string().optional(),
   date: z.string().optional(),
-  time: z.string().optional(),
+  time: z.string(),
   filters: z.array(z.string()),
 });
 
