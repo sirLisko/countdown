@@ -48,6 +48,8 @@ const InputForm = () => {
       message: "",
       filters: [],
       time: "00:00",
+      obfuscate: false,
+      date: "",
     },
   });
   const { toast } = useToast();
@@ -65,7 +67,9 @@ const InputForm = () => {
   function onSubmit(data: CountdownType) {
     if (isValid && data.date) {
       const qs = createQueryString(data as Countdown);
-      setLink(`${window.location.origin}/?${qs}`);
+      setLink(
+        `${window.location.origin}/${data.obfuscate ? btoa(qs) : `?${qs}`}`,
+      );
     } else {
       setLink(undefined);
     }
@@ -191,35 +195,64 @@ const InputForm = () => {
             </FormItem>
           )}
         />
-      </form>
-      {link && (
-        <div className="flex items-center space-x-2 mt-5">
-          <div className="grid flex-1 gap-2">
-            <Label htmlFor="link" className="sr-only">
-              Link
-            </Label>
-            <Input id="link" value={link} readOnly />
-          </div>
-          {isTouchDevice ? (
-            <Button type="submit" size="sm" className="px-3" onClick={onShare}>
-              <span className="sr-only">Share</span>
-              <Share1Icon className="h-4 w-4" />
-            </Button>
-          ) : (
-            <DialogClose asChild>
-              <Button type="submit" size="sm" className="px-3" onClick={onCopy}>
-                <span className="sr-only">Copy</span>
-                <CopyIcon className="h-4 w-4" />
+        {link && (
+          <>
+            <div className="flex items-center space-x-2 mt-5">
+              <div className="grid flex-1 gap-2">
+                <Label htmlFor="link" className="sr-only">
+                  Link
+                </Label>
+                <Input id="link" value={link} readOnly />
+              </div>
+              {isTouchDevice ? (
+                <Button
+                  type="submit"
+                  size="sm"
+                  className="px-3"
+                  onClick={onShare}
+                >
+                  <span className="sr-only">Share</span>
+                  <Share1Icon className="h-4 w-4" />
+                </Button>
+              ) : (
+                <DialogClose asChild>
+                  <Button
+                    type="submit"
+                    size="sm"
+                    className="px-3"
+                    onClick={onCopy}
+                  >
+                    <span className="sr-only">Copy</span>
+                    <CopyIcon className="h-4 w-4" />
+                  </Button>
+                </DialogClose>
+              )}
+              <Button size="sm" className="px-3" asChild>
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                  <ExternalLinkIcon className="h-4 w-4" />
+                </a>
               </Button>
-            </DialogClose>
-          )}
-          <Button size="sm" className="px-3" asChild>
-            <a href={link} target="_blank" rel="noopener noreferrer">
-              <ExternalLinkIcon className="h-4 w-4" />
-            </a>
-          </Button>
-        </div>
-      )}
+            </div>
+            <FormField
+              control={form.control}
+              name="obfuscate"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md ">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormLabel>Obfuscate the link</FormLabel>
+                  </div>
+                </FormItem>
+              )}
+            />
+          </>
+        )}
+      </form>
     </Form>
   );
 };

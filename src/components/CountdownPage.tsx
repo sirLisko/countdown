@@ -14,10 +14,14 @@ const CountdownPage: React.FC = () => {
   const [filters, setFilters] = useState<string[]>([]);
 
   useEffect(() => {
+    const interval = setInterval(() => setNow(new Date()), 1000);
+
+    const path = window.location.pathname.split("/").pop();
     const searchParams = new URLSearchParams(window.location.search);
 
-    const interval = setInterval(() => setNow(new Date()), 1000);
-    const qs = searchParams && getQueryString(searchParams.toString());
+    const qs = path
+      ? getQueryString(atob(path))
+      : searchParams && getQueryString(searchParams.toString());
 
     if (qs && qs.then) {
       const { message: qsMessage, then: qsThen, filters: qsFilters } = qs;
@@ -46,8 +50,13 @@ const CountdownPage: React.FC = () => {
 
   if (!isValidDate(then)) {
     return (
-      <div style={{ textAlign: "center" }}>
-        Oops! Something went wrong with your date
+      <div className="flex h-screen">
+        <div className="m-auto text-center text-2xl p-3">
+          Oops! Something went wrong with your date
+          <div className="text-center mt-20">
+            <DialogNew />
+          </div>
+        </div>
       </div>
     );
   }
