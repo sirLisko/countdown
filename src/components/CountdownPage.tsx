@@ -5,7 +5,7 @@ import { isValidDate, normaliseDateOrder } from "../utils/date";
 import Footer from "./Footer";
 import DialogNew from "./DialogNew";
 
-const NEXT_YEAR = new Date(new Date().getFullYear() + 1, 0, 1, 0, 0, 0);
+import dates from "../dates";
 
 const CountdownPage: React.FC = () => {
   const [now, setNow] = useState(new Date());
@@ -35,8 +35,11 @@ const CountdownPage: React.FC = () => {
       setMessage(qsMessage || "\u00A0");
       if (qsFilters) setFilters(qsFilters);
     } else {
-      setThen(NEXT_YEAR);
-      setMessage("to the next year");
+      const { date, text, filters } =
+        dates[Math.floor(Math.random() * dates.length)];
+      setThen(date);
+      setMessage(text);
+      if (filters) setFilters(filters);
     }
 
     return () => clearInterval(interval);
