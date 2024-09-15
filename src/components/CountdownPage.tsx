@@ -6,6 +6,7 @@ import DialogNew from "./DialogNew";
 import dates from "../dates";
 import type { Countdown as CountdownType } from "@/types";
 import Countdown from "./Counter/Countdown";
+import DynammicTitle from "./Counter/DynamicTitle";
 
 const CountdownPage: React.FC = () => {
   const [now, setNow] = useState(new Date());
@@ -75,9 +76,7 @@ const CountdownPage: React.FC = () => {
 
   return (
     <>
-      <h1 className="text-center my-[10vh] mx-auto text-[2.5rem] md:text-[5vw]">
-        {message}
-      </h1>
+      <DynammicTitle message={message} />
       <Countdown
         from={from}
         to={to}
