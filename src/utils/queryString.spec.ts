@@ -16,21 +16,25 @@ describe("queryString util", () => {
 describe("createQueryString util", () => {
   it("should return the the correct query string", () => {
     const countdown: Countdown = {
-      date: "2000-12-20T23:00",
+      date: "2000-12-20",
       message: "asd",
       filters: ["m", "s"],
+      time: "00:00",
     };
     const createdString = createQueryString(countdown);
-    expect(createdString).toEqual("f=m%2Cs&m=asd&t=2000-12-20T23%3A00");
+    expect(createdString).toEqual(
+      "f=m%2Cs&m=asd&t=2000-12-20T00%3A00%3A00.000Z",
+    );
   });
 
   it("should not return filters if none selected", () => {
     const countdown = {
-      date: "2000-12-20T23:00:00.000Z",
+      date: "2000-12-20",
       message: "asd",
       filters: [],
+      time: "17:30",
     };
     const createdString = createQueryString(countdown);
-    expect(createdString).toEqual("m=asd&t=2000-12-20T23%3A00%3A00.000Z");
+    expect(createdString).toEqual("m=asd&t=2000-12-20T17%3A30%3A00.000Z");
   });
 });

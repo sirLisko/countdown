@@ -167,16 +167,15 @@ const InputForm = () => {
                           <FormControl>
                             <Checkbox
                               checked={field.value?.includes(item.id)}
-                              onCheckedChange={(checked) => {
-                                console.log(field.value, item.id);
-                                return checked
+                              onCheckedChange={(checked) =>
+                                checked
                                   ? field.onChange([...field.value, item.id])
                                   : field.onChange(
                                       field.value?.filter(
                                         (value) => value !== item.id,
                                       ),
-                                    );
-                              }}
+                                    )
+                              }
                             />
                           </FormControl>
                           <FormLabel className="text-sm font-normal">

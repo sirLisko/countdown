@@ -11,11 +11,16 @@ export const getQueryString = (search: string) => {
   };
 };
 
-export const createQueryString = ({ message: m, date, filters }: Countdown) =>
+export const createQueryString = ({
+  message: m,
+  date,
+  time,
+  filters,
+}: Countdown) =>
   queryString.stringify(
     {
       m,
-      t: date,
+      t: `${date}T${time}:00.000Z`,
       f: filters.length ? filters.join(",") : undefined,
     },
     { arrayFormat: "comma" },
