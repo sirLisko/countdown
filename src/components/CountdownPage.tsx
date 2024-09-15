@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
-import Countdown from "./Counter/Countdown";
 import { getQueryString } from "../utils/queryString";
 import { isValidDate, normaliseDateOrder } from "../utils/date";
-import Footer from "./Footer";
 import DialogNew from "./DialogNew";
 
 import dates from "../dates";
+import type { Countdown as CountdownType } from "@/types";
+import Countdown from "./Counter/Countdown";
 
 const CountdownPage: React.FC = () => {
   const [now, setNow] = useState(new Date());
   const [then, setThen] = useState<Date>();
   const [message, setMessage] = useState<string>();
   const [filters, setFilters] = useState<string[]>([]);
+  const [obfuscate, setObfuscate] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => setNow(new Date()), 1000);
@@ -22,18 +23,18 @@ const CountdownPage: React.FC = () => {
     const qs = path
       ? getQueryString(atob(path))
       : searchParams && getQueryString(searchParams.toString());
+    setObfuscate(!!path);
 
     if (qs && qs.then) {
-      const { message: qsMessage, then: qsThen, filters: qsFilters } = qs;
+      const { message, then, filters } = qs;
+      setThen(then);
+      setMessage(message || "\u00A0");
+      if (filters) setFilters(filters);
 
       document.title =
-        new Date().getTime() < qsThen.getTime()
-          ? `${qsMessage ? qsMessage + " - " : ""}How much time left? - Countdown`
-          : `${qsMessage ? qsMessage + " - " : ""}How long ago? - Countdown`;
-
-      setThen(qsThen);
-      setMessage(qsMessage || "\u00A0");
-      if (qsFilters) setFilters(qsFilters);
+        new Date().getTime() < then.getTime()
+          ? `${message ? message + " - " : ""}How much time left? - Countdown`
+          : `${message ? message + " - " : ""}How long ago? - Countdown`;
     } else {
       const { date, text, filters } =
         dates[Math.floor(Math.random() * dates.length)];
@@ -64,6 +65,14 @@ const CountdownPage: React.FC = () => {
     );
   }
 
+  const defaultValues: CountdownType = {
+    message,
+    date: then.toISOString().split("T")[0],
+    time: then.toTimeString().split(" ")[0].substring(0, 5),
+    filters,
+    obfuscate,
+  };
+
   return (
     <>
       <h1 className="text-center my-[10vh] mx-auto text-[2.5rem] md:text-[5vw]">
@@ -76,9 +85,8 @@ const CountdownPage: React.FC = () => {
         isInverted={isInverted}
       />
       <div className="text-center">
-        <DialogNew />
+        <DialogNew defaultValues={defaultValues} />
       </div>
-      <Footer />
     </>
   );
 };

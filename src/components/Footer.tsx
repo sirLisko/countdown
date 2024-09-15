@@ -1,5 +1,5 @@
 const Footer = () => (
-  <footer className="absolute bottom-4 text-gray-500 left-1/2 transform -translate-x-1/2 text-center whitespace-nowrap">
+  <footer className="text-sm text-muted-foreground pb-3 pt-10 text-center whitespace-nowrap">
     <p>
       <span className="block sm:inline">
         Created with ❤ by{" "}
