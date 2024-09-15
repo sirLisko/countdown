@@ -8,7 +8,7 @@ const countdowns: { date: Date; text: string; filters?: string[] }[] = [
     text: "since the start of this year",
   },
   {
-    date: new Date(1969, 6, 20, 20, 17), // July 20, 1969, 20:17 UTC
+    date: new Date(Date.UTC(1969, 6, 20, 20, 17)), // July 20, 1969, 20:17 UTC
     text: "since the Moon landing",
   },
   {
@@ -16,7 +16,7 @@ const countdowns: { date: Date; text: string; filters?: string[] }[] = [
     text: "since Doc and Marty went Back to the Future",
   },
   {
-    date: new Date(1912, 3, 15, 2, 20), // April 15, 1912, 02:20
+    date: new Date(Date.UTC(1912, 3, 15, 5, 20)), // April 15, 1912, 05:20 UTC
     text: "since the sinking of the Titanic",
   },
   {
