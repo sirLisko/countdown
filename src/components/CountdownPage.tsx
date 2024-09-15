@@ -78,7 +78,6 @@ const CountdownPage: React.FC = () => {
       <div className="text-center">
         <DialogNew />
       </div>
-      <Footer />
     </>
   );
 };
