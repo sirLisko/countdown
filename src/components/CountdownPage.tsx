@@ -63,7 +63,7 @@ const CountdownPage: React.FC = () => {
 
   return (
     <>
-      <h1 className="text-center my-[10vh] mx-auto text-[2.5rem] md:text-[5vw] text-gray-800">
+      <h1 className="text-center my-[10vh] mx-auto text-[2.5rem] md:text-[5vw]">
         {message}
       </h1>
       <Countdown
