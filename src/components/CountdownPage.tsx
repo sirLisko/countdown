@@ -46,8 +46,13 @@ const CountdownPage: React.FC = () => {
 
   if (!isValidDate(then)) {
     return (
-      <div style={{ textAlign: "center" }}>
-        Oops! Something went wrong with your date
+      <div className="flex h-screen">
+        <div className="m-auto text-center text-2xl p-3">
+          Oops! Something went wrong with your date
+          <div className="text-center mt-20">
+            <DialogNew />
+          </div>
+        </div>
       </div>
     );
   }
