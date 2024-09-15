@@ -49,3 +49,16 @@ export const getTimeDifferences = (to: Date, from: Date) => {
     seconds,
   };
 };
+
+const getTimezoneOffset = (value: Date) => value.getTimezoneOffset() * 60000;
+
+/**
+ * Converts a local date to a date object that represents the same moment in UTC.
+ * @param {Date | string} value - The local date to convert to UTC.
+ * @returns {Date} The equivalent UTC date.
+ */
+export const localDateAsUTC = (value: Date | string) => {
+  const date = new Date(value);
+  const utcFromLocal = new Date(date.getTime() + getTimezoneOffset(date));
+  return utcFromLocal;
+};
