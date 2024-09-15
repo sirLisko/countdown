@@ -205,23 +205,13 @@ const InputForm = ({ defaultValues }: { defaultValues?: Countdown }) => {
                 <Input id="link" value={link} readOnly />
               </div>
               {isTouchDevice ? (
-                <Button
-                  type="submit"
-                  size="sm"
-                  className="px-3"
-                  onClick={onShare}
-                >
+                <Button size="sm" className="px-3" onClick={onShare}>
                   <span className="sr-only">Share</span>
                   <Share1Icon className="h-4 w-4" />
                 </Button>
               ) : (
                 <DialogClose asChild>
-                  <Button
-                    type="submit"
-                    size="sm"
-                    className="px-3"
-                    onClick={onCopy}
-                  >
+                  <Button size="sm" className="px-3" onClick={onCopy}>
                     <span className="sr-only">Copy</span>
                     <CopyIcon className="h-4 w-4" />
                   </Button>

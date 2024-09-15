@@ -1,4 +1,9 @@
-import { isValidDate, normaliseDateOrder, getTimeDifferences } from "./date";
+import {
+  isValidDate,
+  normaliseDateOrder,
+  getTimeDifferences,
+  localDateAsUTC,
+} from "./date";
 
 describe("date util", () => {
   beforeAll(() => {
@@ -54,5 +59,15 @@ describe("date util", () => {
         seconds: 3,
       });
     });
+  });
+});
+
+describe("localDateAsUTC", () => {
+  it("should return a date object that represents the same moment in UTC", () => {
+    const localDate = new Date("2022-01-01T00:00:00");
+    const utcDate = localDateAsUTC(localDate);
+
+    expect(utcDate.getTime()).toBe(localDate.getTime());
+    expect(utcDate.toISOString()).toContain("Z");
   });
 });

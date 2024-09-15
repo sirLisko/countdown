@@ -29,7 +29,7 @@ It's possible to [check out the v1 of the project](https://github.com/sirLisko/c
 
 ### Example
 
-<https://countdown.sirlisko.com/?f=h,m,s&m=new%20year%27s%20eve%202020&t=2020-01-01T00%3A00>
+[Time since Doc and Marty went Back to the Future](http://localhost:5173/?f=h%2Cm%2Cs&m=since%20Doc%20and%20Marty%20went%20Back%20to%20the%20Future&t=1985-10-26T09%3A00%3A00.000Z)
 
 [test-image]: https://github.com/sirlisko/countdown/workflows/Test%20CI/badge.svg
 [test-url]: https://github.com/sirLisko/countdown/actions
