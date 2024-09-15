@@ -11,7 +11,7 @@ const App = () => (
         <ModeToggle />
       </div>
       <div className="min-h-screen flex flex-col">
-        <main className="container mx-auto flex-1">
+        <main className="container mx-auto flex-1 px-3">
           <CountdownPage />
           <Toaster />
         </main>
