@@ -5,6 +5,7 @@ export const Countdown = z.object({
   date: z.string().optional(),
   time: z.string(),
   filters: z.array(z.string()),
+  obfuscate: z.boolean().optional(),
 });
 
 export type Countdown = z.infer<typeof Countdown>;

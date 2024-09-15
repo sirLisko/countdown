@@ -14,10 +14,14 @@ const CountdownPage: React.FC = () => {
   const [filters, setFilters] = useState<string[]>([]);
 
   useEffect(() => {
+    const interval = setInterval(() => setNow(new Date()), 1000);
+
+    const path = window.location.pathname.split("/").pop();
     const searchParams = new URLSearchParams(window.location.search);
 
-    const interval = setInterval(() => setNow(new Date()), 1000);
-    const qs = searchParams && getQueryString(searchParams.toString());
+    const qs = path
+      ? getQueryString(atob(path))
+      : searchParams && getQueryString(searchParams.toString());
 
     if (qs && qs.then) {
       const { message: qsMessage, then: qsThen, filters: qsFilters } = qs;
