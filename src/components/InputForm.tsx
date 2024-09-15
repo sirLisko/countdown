@@ -37,14 +37,14 @@ const filters = [
   },
 ] as const;
 
-const InputForm = () => {
+const InputForm = ({ defaultValues }: { defaultValues?: Countdown }) => {
   const [link, setLink] = useState<string | undefined>("");
   const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   const form = useForm<CountdownType>({
     mode: "onTouched",
     resolver: zodResolver(Countdown),
-    defaultValues: {
+    defaultValues: defaultValues ?? {
       message: "",
       filters: [],
       time: "00:00",
