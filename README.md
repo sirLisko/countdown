@@ -29,7 +29,7 @@ It's possible to [check out the v1 of the project](https://github.com/sirLisko/c
 
 ### Example
 
-[Time since Doc and Marty went Back to the Future](http://localhost:5173/?f=h%2Cm%2Cs&m=since%20Doc%20and%20Marty%20went%20Back%20to%20the%20Future&t=1985-10-26T09%3A00%3A00.000Z)
+[Time since Doc and Marty went Back to the Future](https://countdown.sirlisko.com/?f=h%2Cm%2Cs&m=since%20Doc%20and%20Marty%20went%20Back%20to%20the%20Future&t=1985-10-26T09%3A00%3A00.000Z)
 
 [test-image]: https://github.com/sirlisko/countdown/workflows/Test%20CI/badge.svg
 [test-url]: https://github.com/sirLisko/countdown/actions
